@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register"
+    tools:layout_editor_absoluteY="81dp">
+
+    <EditText
+        android:id="@+id/editText_r_username"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="25dp"
+        android:ems="10"
+        android:hint="@string/txt_r_username"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editText_r_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/txt_r_username" />
+
+    <EditText
+        android:id="@+id/editText_r_email"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:hint="@string/txt_r_email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/editText_r_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_r_username"
+        tools:text="@string/txt_r_email" />
+
+    <EditText
+        android:id="@+id/editText_r_password"
+        android:layout_width="332dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="@string/txt_r_password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/radioButton_m"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_r_email"
+        tools:text="@string/txt_r_password" />
+
+    <Button
+        android:id="@+id/button_r"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="12dp"
+        android:onClick="register_OK"
+        android:text="@string/btn_r_register"
+        app:layout_constraintBottom_toTopOf="@+id/textView_r_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioButton_m"
+        tools:text="@string/btn_r_register" />
+
+    <TextView
+        android:id="@+id/textView_r_login"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="90dp"
+        android:onClick="register"
+        android:text="@string/txt_r_login"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/button_r"
+        app:layout_constraintStart_toStartOf="@+id/button_r"
+        app:layout_constraintTop_toBottomOf="@+id/button_r"
+        tools:text="@string/txt_r_login" />
+
+    <RadioButton
+        android:id="@+id/radioButton_m"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="24dp"
+        android:text="Male"
+        app:layout_constraintBottom_toTopOf="@+id/button_r"
+        app:layout_constraintEnd_toStartOf="@+id/radioButton_f"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_r_password" />
+
+    <RadioButton
+        android:id="@+id/radioButton_f"
+        android:layout_width="100dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="168dp"
+        android:text="Female"
+        app:layout_constraintBaseline_toBaselineOf="@+id/radioButton_m"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioButton_m" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
