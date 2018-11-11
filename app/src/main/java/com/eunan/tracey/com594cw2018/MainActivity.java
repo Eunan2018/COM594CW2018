@@ -1,13 +1,13 @@
 package com.eunan.tracey.com594cw2018;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
         progressBarLogin.setVisibility(View.INVISIBLE);
         loginDatabaseAdapter = new LoginDataBaseAdapter(this);
         loginDatabaseAdapter = loginDatabaseAdapter.open();
-
-
         loginName = findViewById (R.id.loginName);
         loginPassword = findViewById(R.id.loginPassword);
     }
@@ -38,8 +36,11 @@ public class MainActivity extends AppCompatActivity {
         try{
              String userName = loginName.getEditText().getText().toString();
              String password = loginPassword.getEditText().getText().toString();
-            if(userName.equals("") || password.equals("")){
-                Toast.makeText(this,"Fill All Fields",Toast.LENGTH_LONG).show();
+            if(userName.equals("") ){
+                loginName.setError("User cannot be blank");
+            }
+            if(userName.equals("") ){
+                loginPassword.setError("Password cannot be blank");
             }
             // Fetch the Password from the database for the respective user name
             if(!password.equals("")){
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 if(password.equals(storedPassword)){
                     progressBarLogin.setVisibility(View.VISIBLE);
                     Toast.makeText(this,"Congrats: Login Successful",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(this,Weather.class);
+                    Intent intent = new Intent(this,DisplayWeather.class);
                     startActivity(intent);
                     finish();
                 }else{

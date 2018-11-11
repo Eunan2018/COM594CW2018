@@ -2,6 +2,9 @@ package com.eunan.tracey.com594cw2018;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -36,7 +39,7 @@ public class GetDataTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        Log.d(TAG, "doInBackground: starts");
+        Log.d(TAG, "doInBackground: starts" + strings);
         try {
             URL url = new URL(strings[0]);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -50,9 +53,12 @@ public class GetDataTask extends AsyncTask<String, Void, String> {
                 builder.append(inputString);
             }
             urlConnection.disconnect();
+
+
             return builder.toString();
+
         } catch (IOException e) {
-            Log.e(TAG, "doInBackground: IOException " + e.getMessage());
+            Log.e(TAG, "doInBackground: IOException " + strings.toString());
             e.printStackTrace();
         }
         return null;

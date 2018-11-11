@@ -14,4 +14,11 @@
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="city">City: %s</string>
+    <string name="temp">Temperature: %s</string>
+    <string name="date">Date: %s</string>
+    <string name="pressure">Pressure: %s</string>
+    <string name="humidity">Humidity: %s</string>
+    <string name="speed">Wind: %s</string>
+    <string name="enter_a_city">Enter a city</string>
 </resources>

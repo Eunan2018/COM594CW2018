@@ -29,8 +29,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/design_default_color_primary"
             android:hint="@string/user_name"
-            android:inputType="textAutoComplete|textEmailAddress" />
+            android:inputType="textAutoComplete|textEmailAddress"
+            android:textColor="@color/design_default_color_primary_dark" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -51,8 +53,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/design_default_color_primary"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/design_default_color_primary_dark" />
     </android.support.design.widget.TextInputLayout>
 
 
@@ -63,7 +67,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@color/colorAccent"
+        android:background="@color/design_default_color_primary_dark"
         android:onClick="logIn"
         android:text="@string/btn_login"
         android:textColor="@android:color/background_light"
@@ -78,6 +82,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:background="@color/design_default_color_primary_dark"
         android:onClick="register"
         android:text="@string/txtview_signup"
         android:textAlignment="center"
@@ -107,7 +112,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="16dp"
         android:text="@string/login"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/design_default_color_primary_dark"
         android:textColorLink="@color/colorPrimaryDark"
         android:textSize="18sp"
         android:textStyle="bold"

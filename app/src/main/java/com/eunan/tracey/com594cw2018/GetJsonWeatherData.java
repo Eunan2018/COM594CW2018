@@ -1,22 +1,32 @@
 package com.eunan.tracey.com594cw2018;
 
-import android.os.AsyncTask;
+import android.media.Image;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class GetJsonWeatherData extends AsyncTask<String, Void, WeatherConditions> implements GetDataTask.OnDownloadComplete {
+public class GetJsonWeatherData extends AppCompatActivity implements GetDataTask.OnDownloadComplete {
     private static final String TAG = "GetJsonWeatherData";
 
-    private WeatherConditions weatherConditions = new WeatherConditions();
+    private WeatherModel weatherModel = new WeatherModel();
     private final OnDataAvailable mCallBack;
     private String baseUrl;
 
+
     interface OnDataAvailable {
-        void onDataAvailable(WeatherConditions weatherConditions);
+        void onDataAvailable(WeatherModel weatherModel);
     }
 
     public GetJsonWeatherData(String url, OnDataAvailable callBack) {
@@ -25,18 +35,7 @@ public class GetJsonWeatherData extends AsyncTask<String, Void, WeatherCondition
         mCallBack = callBack;
     }
 
-    @Override
-    protected WeatherConditions doInBackground(String... strings) {
-        Log.d(TAG, "doInBackground: starts" + strings);
-        GetDataTask getDataTask = new GetDataTask(this);
-        getDataTask.execute(strings);
-        Log.d(TAG, "doInBackground: ends");
-        return weatherConditions;
-    }
-
-
-
-    void executeOnSameThread() {
+    void executeGetDataTask() {
         Log.d(TAG, "executeOnSameThread: starts");
         GetDataTask getDataTask = new GetDataTask(this);
         getDataTask.execute(baseUrl);
@@ -45,37 +44,47 @@ public class GetJsonWeatherData extends AsyncTask<String, Void, WeatherCondition
 
     @Override
     public void onDownloadComplete(String data) {
-        Log.d(TAG, "onDownLoadComplete: starts");
+        Log.d(TAG, "onDownLoadComplete: starts" + data);
 
         try {
-
-            // Parse data
             JSONObject topLevel = new JSONObject(data);
-            JSONObject main = topLevel.getJSONObject("main");
-            String windInfo = topLevel.getString("wind");
-            JSONObject windInfoObject = new JSONObject(windInfo);
+            //String msg = topLevel.getString("message");
+            if (data.equalsIgnoreCase("Error: Not found city")) {
+                Log.e("TAG", "City not found");
+                Toast.makeText(this,"Error with city name",Toast.LENGTH_LONG).show();
+            } else {
+                // Parse data
 
-            // Use weather model and set each value
-            String temperature = String.valueOf(main.getDouble("temp"));
-            weatherConditions.setTemperature(temperature);
-            String humidity = String.valueOf(main.getDouble("humidity"));
-            weatherConditions.setHumidity(humidity);
-            String pressure = String.valueOf(main.getInt("pressure"));
-            weatherConditions.setPressure(pressure);
-            String speed = String.valueOf(windInfoObject.getInt("speed"));
-            weatherConditions.setSpeed(speed);
-            String city = String.valueOf(topLevel.getString("name"));
-            weatherConditions.setCity(city);
-            Long l = Long.valueOf(topLevel.getLong("dt"));
-            Date datetime = new Date(l * 1000);
-            String dt = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(datetime);
-            weatherConditions.setDate(dt);
-        } catch (Exception e) {
-            Log.d(TAG, "onDownLoadComplete: Exception " + e.getMessage());
+                JSONObject main = topLevel.getJSONObject("main");
+                String windInfo = topLevel.getString("wind");
+                JSONObject windInfoObject = new JSONObject(windInfo);
+
+                JSONArray itemsArray = topLevel.getJSONArray("weather");
+                String img = itemsArray.getJSONObject(0).getString("icon");
+
+                weatherModel.setImage(img);
+
+                String temperature = String.valueOf(main.getDouble("temp"));
+                weatherModel.setTemperature(temperature);
+                String humidity = String.valueOf(main.getDouble("humidity"));
+                weatherModel.setHumidity(humidity);
+                String pressure = String.valueOf(main.getInt("pressure"));
+                weatherModel.setPressure(pressure);
+                String speed = String.valueOf(windInfoObject.getInt("speed"));
+                weatherModel.setSpeed(speed);
+                String city = String.valueOf(topLevel.getString("name"));
+                weatherModel.setCity(city);
+                Long l = Long.valueOf(topLevel.getLong("dt"));
+                Date datetime = new Date(l * 1000);
+                String dt = new SimpleDateFormat("dd.MM.yyyy").format(datetime);
+                weatherModel.setDate(dt);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
         if (mCallBack != null) {
             // Inform caller that processing is finished
-            mCallBack.onDataAvailable(weatherConditions);
+            mCallBack.onDataAvailable(weatherModel);
         }
         Log.d(TAG, "onDownLoadComplete: ends");
     }

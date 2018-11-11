@@ -4,97 +4,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/design_default_color_primary"
     android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-    tools:context=".Weather"
+    tools:context=".DisplayWeather"
     tools:layout_editor_absoluteY="81dp">
 
 
     <TextView
         android:id="@+id/textViewSpeed"
-        android:layout_width="327dp"
-        android:layout_height="45dp"
+        android:layout_width="344dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textViewDate"
-        app:layout_constraintStart_toStartOf="@+id/textViewDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
 
     <TextView
         android:id="@+id/textViewTemperature"
-        android:layout_width="330dp"
-        android:layout_height="47dp"
+        android:layout_width="346dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/searchView"
-        app:layout_constraintStart_toStartOf="@+id/searchView"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_weather" />
 
     <TextView
         android:id="@+id/textViewHumidity"
-        android:layout_width="330dp"
-        android:layout_height="47dp"
+        android:layout_width="346dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textViewTemperature"
-        app:layout_constraintStart_toStartOf="@+id/textViewTemperature"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTemperature" />
 
     <TextView
         android:id="@+id/textViewPressure"
-        android:layout_width="330dp"
-        android:layout_height="47dp"
+        android:layout_width="346dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textViewHumidity"
-        app:layout_constraintStart_toStartOf="@+id/textViewHumidity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewHumidity" />
 
     <TextView
         android:id="@+id/textViewCity"
-        android:layout_width="328dp"
-        android:layout_height="47dp"
+        android:layout_width="346dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textViewPressure"
-        app:layout_constraintStart_toStartOf="@+id/textViewPressure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPressure" />
 
     <TextView
         android:id="@+id/textViewDate"
-        android:layout_width="328dp"
-        android:layout_height="47dp"
+        android:layout_width="346dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textViewCity"
-        app:layout_constraintStart_toStartOf="@+id/textViewCity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCity" />
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="326dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="8dp"
+    <Button
+        android:id="@+id/jump_to_stack"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:visibility="visible"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/holo_orange_dark"
+        android:text="-->"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSpeed" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+    <ImageView
+        android:id="@+id/imageview_weather"
+        android:layout_width="81dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
+        android:layout_width="329dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Enter city or postcode"
-        android:textSize="18sp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorAccent"
+        android:dropDownHeight="match_parent"
+        android:hint="@string/enter_a_city"
+        android:popupBackground="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

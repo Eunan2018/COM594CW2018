@@ -1,6 +1,8 @@
 package com.eunan.tracey.com594cw2018;
 
 
+import android.media.Image;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class WeatherConditions {
+public class WeatherModel {
 
     @Getter
     @Setter
@@ -31,4 +33,7 @@ public class WeatherConditions {
     @Getter
     @Setter
     public String date;
+    @Getter
+    @Setter
+    public String image;
 }

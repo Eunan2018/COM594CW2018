@@ -28,20 +28,23 @@ public class Register extends AppCompatActivity {
         String userName = ((EditText)findViewById(R.id.editText_r_username)).getText().toString();
         String email = ((EditText)findViewById(R.id.editText_r_email)).getText().toString();
         String password = ((EditText)findViewById(R.id.editText_r_password)).getText().toString();
+
+        // TODO Use a group box for radio buttons
         String m = ((RadioButton) findViewById(R.id.radioButton_m)).getText().toString();
         String f = ((RadioButton) findViewById(R.id.radioButton_f)).getText().toString();
 
         if(userName.equals("") || email.equals("") || password.equals("")|| m.equals("")){
-            Toast.makeText(Register.this,"Fill Alll Fields",Toast.LENGTH_LONG).show();
+            Toast.makeText(Register.this,"Fill All Fields",Toast.LENGTH_LONG).show();
             return;
         }else{
             progressBarReg.setVisibility(View.VISIBLE);
             // Save data in the database
             loginDatabaseAdapter.insertEntry(userName,email,password,m);
-            Toast.makeText(getApplicationContext(),"Your Account is Successfully Created. you can Sign In now",
+            Toast.makeText(getApplicationContext(),"Your Account is Successfully Created. You can Sign In now",
                     Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Register.this,MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 

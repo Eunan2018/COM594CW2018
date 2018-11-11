@@ -1,6 +1,5 @@
 package com.eunan.tracey.com594cw2018;
 
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -8,100 +7,67 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class GetJsonStackData extends AppCompatActivity {
+
+public class GetJsonStackData implements GetDataTask.OnDownloadComplete {
     private static final String TAG = "GetJsonStackData";
     private String baseUrl;
-    private ArrayList<Stack> stacks;
+    private ArrayList<StackModel> stackList = new ArrayList<>();
+    private final OnDataAvailable mCallBack;
 
-    public GetJsonStackData(String bUrl) {
-        Log.d(TAG, "GetJsonStackData: called");
-        baseUrl = bUrl;
-        onDownLoadComplete(baseUrl);
-
+    interface OnDataAvailable {
+        void onDataAvailable(ArrayList<StackModel> stackModel);
     }
 
 
-//
-//    void exectuteOnSameThread(String searchCriteria){
-//        Log.d(TAG, "exectuteOnSameThread: starts");
-//        String destinationUri = createUri(searchCriteria);
-//
-//        GetDataTask getDataTask = new GetDataTask();
-//        getDataTask.execute(destinationUri);
-//    }
-//
-//    private String createUri(String searchCriteria){
-//        Log.d(TAG, "createUri: starts");
-//
-//        return Uri.parse(baseUrl).buildUpon()
-//                .appendQueryParameter("",searchCriteria)
-//                .build().toString();
-//    }
+    public GetJsonStackData(String url, OnDataAvailable callBack) {
+        Log.d(TAG, "GetJsonStackData: called");
+        mCallBack = callBack;
+        baseUrl = url;
+    }
 
+    void executeGetDataTask() {
+        Log.d(TAG, "executeOnSameThread: starts");
+        GetDataTask getDataTask = new GetDataTask(this);
+        getDataTask.execute(baseUrl);
+        Log.d(TAG, "executeOnSameThread: ends");
+    }
 
-    public void onDownLoadComplete(String data) {
-        Log.d(TAG, "onDownLoadComplete: starts");
-
-        stacks = new ArrayList<>();
-
+    @Override
+    public void onDownloadComplete(String data) {
+        Log.d(TAG, "onDownloadComplete: starts");
         try {
-
-//            JSONObject jsonData = new JSONObject(data);
-//            JSONArray itemsArray = jsonData.getJSONArray("items");
-//            //JSONObject owner = jsonData.getJSONObject("owner");
-//            JSONObject outputJson = itemsArray.getJSONArray(0).getJSONObject(1);
-//            //JSONObject style = outputJson.getJSONObject("owner").getJSONArray("items").getJSONObject(1);
-//            String n = String.valueOf(outputJson.getString("display_name"));
-//            Stack ss = new Stack();
-//            ss.setDisplayName(n);
-
-
+            // Start at the root of the json object
             JSONObject root = new JSONObject(data);
             JSONArray itemsArray = root.getJSONArray("items");
-            JSONObject tag = itemsArray.getJSONObject(0);
-          //  JSONArray tags = tag.getJSONArray("tags");
+            for (int i = 0; i < itemsArray.length(); i++) {
 
-            JSONObject owners = tag.getJSONObject("owner");
+                // Create StackModel class to add to ArrayList
+                StackModel stackModel = new StackModel();
 
-            String name = String.valueOf(owners.getString("display_name"));
-            Log.d(TAG, "onDownLoadComplete: " + name);
+                // Get values from JSON Array items
+                String title = itemsArray.getJSONObject(i).getString("title");
+                stackModel.setTitle(String.valueOf(title));
 
+                String link = itemsArray.getJSONObject(i).getString("link");
+                stackModel.setLink(String.valueOf(link));
 
+                // Get first element in JSON Array Owner
+                JSONObject jsonImage = itemsArray.getJSONObject(i);
+                JSONObject img = jsonImage.getJSONObject("owner");
 
+                String image = String.valueOf(img.getString("profile_image"));
+                stackModel.setImage(String.valueOf(image));
 
-
-//            for (int i = 0; i < itemsArray.length(); i++) {
-//                JSONObject jsonStack = itemsArray.getJSONObject(i);
-//
-//                Log.d(TAG, "onDownLoadComplete: " + jsonStack.toString());
-//                for(int j=0;j<jsonStack.getJSONArray("tags").length();j++){
-//                    Stack stack = new Stack();
-//                    //String n = jsonStack.getJSONArray("tags").getJSONObject(j).toString();
-//                    Log.d(TAG, "onDownLoadComplete: " + n);
-//                    //weatherConditions.temperature = String.valueOf(main.getDouble("temp"))
-//                    Log.d(TAG, "onDownLoadComplete: " + stack.displayName);
-//                }
-//
-
-
-//                String name = jsonStack.getString("display_name");
-//                String image = jsonStack.getString("profile_image");
-//                String link = jsonStack.getString("link");
-//                String title = jsonStack.getString("title");
-////
-////                Stack stack = new Stack(name, image, link, title);
-////                stacks.add(stack);
-////                Log.d(TAG, "onDownLoadComplete: finished" + stack.toString());
-//                Log.d(TAG, "onDownLoadComplete: " + jsonStack.toString());
-//             //   Log.d(TAG, "onDownLoadComplete: " + name);
-           // }
-
+                // Add each StackModel to the list
+                stackList.add(stackModel);
+            }
         } catch (Exception e) {
             Log.d(TAG, "onDownLoadComplete: Exception " + e.getMessage());
-            Log.d(TAG, "onDownLoadComplete: ");
-
         }
-}
-
-
+        if (mCallBack != null) {
+            // Inform caller that processing is finished and return List of StackModels
+            mCallBack.onDataAvailable(stackList);
+        }
+        Log.d(TAG, "onDownLoadComplete: ends");
+    }
 }

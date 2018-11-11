@@ -10,11 +10,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Stack {
+public class StackModel {
 
-    @Getter
-    @Setter
-    public String displayName;
     @Getter
     @Setter
     public String image;
