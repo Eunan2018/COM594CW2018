@@ -267,7 +267,7 @@ public class DisplayWeather extends AppCompatActivity implements GetJsonWeatherD
         // unregister listener
         sensorManager.unregisterListener(this);
     }
-    
+
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
