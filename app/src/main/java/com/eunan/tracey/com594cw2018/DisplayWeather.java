@@ -267,12 +267,7 @@ public class DisplayWeather extends AppCompatActivity implements GetJsonWeatherD
         // unregister listener
         sensorManager.unregisterListener(this);
     }
-
-    public void showToast(){
-        Toast.makeText(DisplayWeather.this, GetDataTask.error, Toast.LENGTH_SHORT).show();
-    }
-
-
+    
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
