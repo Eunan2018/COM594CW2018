@@ -15,7 +15,7 @@ public class PropertyManager {
 
     public PropertyManager(Context context) {
         Log.d(TAG, "PropertyManager: called");
-        this.context = context;
+            this.context = context;
         //creates a new object ‘Properties’
         properties = new Properties();
     }
@@ -33,23 +33,6 @@ public class PropertyManager {
             Log.e("PropertiesReader", e.toString());
         }
         return properties;
-    }
-
-    public String readJSONFromAsset(String FileName) {
-
-        String json = null;
-        try {
-            InputStream is = context.getAssets().open(FileName);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
     }
 
 }

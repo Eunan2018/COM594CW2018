@@ -1,15 +1,11 @@
 package com.eunan.tracey.com594cw2018;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -17,8 +13,8 @@ import java.net.URL;
 
 public class GetDataTask extends AsyncTask<String, Void, String> {
     private static final String TAG = "GetDataTask";
-
     private final OnDownloadComplete mCallback;
+    public static String error = "error";
 
     interface OnDownloadComplete {
         void onDownloadComplete(String data);
@@ -30,9 +26,12 @@ public class GetDataTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String s) {
+        super.onPostExecute(s);
         Log.d(TAG, "onPostExecute: parameter = " + s);
-        if (mCallback != null) {
-            mCallback.onDownloadComplete(s);
+        if (s != null) {
+            if (mCallback != null) {
+                mCallback.onDownloadComplete(s);
+            }
         }
         Log.d(TAG, "onPostExecute: ends");
     }
@@ -40,25 +39,28 @@ public class GetDataTask extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... strings) {
         Log.d(TAG, "doInBackground: starts" + strings);
+
         try {
             URL url = new URL(strings[0]);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            HttpURLConnection connection =
+                    (HttpURLConnection) url.openConnection();
 
-            InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder builder = new StringBuilder();
+            if (connection.getResponseCode() == 200) {
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(connection.getInputStream()));
 
-            String inputString;
-            while ((inputString = bufferedReader.readLine()) != null) {
-                builder.append(inputString);
+                StringBuffer json = new StringBuffer();
+                String tmp = "";
+                while ((tmp = reader.readLine()) != null)
+                    json.append(tmp).append("\n");
+                reader.close();
+
+                return json.toString();
+            } else {
+
+                return null;
             }
-            urlConnection.disconnect();
-
-
-            return builder.toString();
-
-        } catch (IOException e) {
-            Log.e(TAG, "doInBackground: IOException " + strings.toString());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

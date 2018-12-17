@@ -7,24 +7,24 @@
     android:background="@android:color/background_light"
     android:visibility="visible"
     tools:context=".MainActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="73dp">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/loginEmail"
         android:layout_width="346dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="40dp"
         android:freezesText="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="28dp"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/googleRadio"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewcloud">
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <android.support.design.widget.TextInputEditText
-            android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:freezesText="true"
@@ -35,106 +35,101 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/loginPassword"
         android:layout_width="352dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="22dp"
         android:freezesText="true"
         android:textColor="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/google_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginEmail">
 
         <android.support.design.widget.TextInputEditText
-            android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_width="307dp"
+            android:layout_height="57dp"
             android:layout_marginStart="20dp"
+            android:freezesText="true"
             android:layout_marginEnd="20dp"
             android:hint="@string/password"
-            android:freezesText="true"
             android:imeOptions="actionGo"
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/google_button"
-        android:layout_width="297dp"
+        android:layout_width="136dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:freezesText="true"
-        android:textAlignment="center"
+        android:layout_marginEnd="42dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/googleRadio"></com.google.android.gms.common.SignInButton>
 
     <Button
         android:id="@+id/button_login"
-        android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="215dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="60dp"
         android:background="@color/colorAccent"
         android:onClick="logIn"
         android:text="@string/btn_login"
         android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/google_button" />
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 
     <TextView
         android:id="@+id/textView_login"
-        android:layout_width="300dp"
+        android:layout_width="199dp"
         android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginEnd="102dp"
         android:background="@color/colorAccent"
         android:onClick="register"
         android:text="@string/txtview_signup"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+        app:layout_constraintStart_toEndOf="@+id/button_login"
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="75dp"
         android:layout_height="44dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="351dp"
         android:text="@string/login"
         android:textColor="@color/colorAccent"
         android:textColorLink="@color/colorAccent"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/loginEmail"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewcloud"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.363"
         tools:text="Login" />
 
     <ImageView
         android:id="@+id/imageViewcloud"
         android:layout_width="75dp"
         android:layout_height="66dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="44dp"
+        android:layout_marginEnd="51dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/loginEmail"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/clouds" />
 
     <RadioButton
         android:id="@+id/googleRadio"
-        android:layout_width="156dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="44dp"
+        android:layout_width="133dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="45dp"
         android:text="Sign in with google"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+        app:layout_constraintStart_toEndOf="@+id/loginPassword"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewcloud" />
 </android.support.constraint.ConstraintLayout>

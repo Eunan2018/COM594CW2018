@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "370850060007",
+    "firebase_url": "https://cloudystack-7f4fe.firebaseio.com",
+    "project_id": "cloudystack-7f4fe",
+    "storage_bucket": "cloudystack-7f4fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370850060007:android:bcf312f69f2715e5",
+        "android_client_info": {
+          "package_name": "com.eunan.tracey.com594cw2018"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370850060007-45kn335igkve5f8d462fg7tc8glvsmdl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2LYwv4rrfI6hzYWYzFHfc93tIKM9F0bk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

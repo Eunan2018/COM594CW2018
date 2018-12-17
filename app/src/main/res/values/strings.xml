@@ -11,14 +11,15 @@
     <string name="txt_r_login">Already Registered? \n Login Here</string>
     <string name="female">Female</string>
     <string name="male">Male</string>
-    <string name="user_name">User Name</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="city">City: %s</string>
-    <string name="temp">Temperature: %s</string>
-    <string name="date">Date: %s</string>
-    <string name="pressure">Pressure: %s</string>
-    <string name="humidity">Humidity: %s</string>
-    <string name="speed">Wind: %s</string>
+    <string name="city">%s</string>
+    <string name="temp">%s</string>
+    <string name="date">%s</string>
+    <string name="pressure">%s</string>
+    <string name="humidity">%s</string>
+    <string name="speed">%s</string>
     <string name="enter_a_city">Enter a city</string>
+    <string name="confirmPassword">Confirm Password</string>
 </resources>

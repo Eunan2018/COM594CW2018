@@ -1,5 +1,6 @@
 package com.eunan.tracey.com594cw2018;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -8,7 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class GetJsonStackData implements GetDataTask.OnDownloadComplete {
+public class GetJsonStackData extends AsyncTask<String ,Void, ArrayList> implements GetDataTask.OnDownloadComplete {
     private static final String TAG = "GetJsonStackData";
     private String baseUrl;
     private ArrayList<StackModel> stackList = new ArrayList<>();
@@ -17,7 +18,6 @@ public class GetJsonStackData implements GetDataTask.OnDownloadComplete {
     interface OnDataAvailable {
         void onDataAvailable(ArrayList<StackModel> stackModel);
     }
-
 
     public GetJsonStackData(String url, OnDataAvailable callBack) {
         Log.d(TAG, "GetJsonStackData: called");
@@ -35,9 +35,16 @@ public class GetJsonStackData implements GetDataTask.OnDownloadComplete {
     @Override
     public void onDownloadComplete(String data) {
         Log.d(TAG, "onDownloadComplete: starts");
+        this.execute(data);
+        Log.d(TAG, "onDownLoadComplete: ends");
+    }
+    @Override
+    protected ArrayList<StackModel> doInBackground(String... strings) {
+        Log.d(TAG, "doInBackground: " + strings);
         try {
             // Start at the root of the json object
-            JSONObject root = new JSONObject(data);
+            String json = strings[0];
+            JSONObject root = new JSONObject(json);
             JSONArray itemsArray = root.getJSONArray("items");
             for (int i = 0; i < itemsArray.length(); i++) {
 
@@ -51,7 +58,7 @@ public class GetJsonStackData implements GetDataTask.OnDownloadComplete {
                 String link = itemsArray.getJSONObject(i).getString("link");
                 stackModel.setLink(String.valueOf(link));
 
-                // Get first element in JSON Array Owner
+                // Get first element in JSON Array owner
                 JSONObject jsonImage = itemsArray.getJSONObject(i);
                 JSONObject img = jsonImage.getJSONObject("owner");
 
@@ -68,6 +75,6 @@ public class GetJsonStackData implements GetDataTask.OnDownloadComplete {
             // Inform caller that processing is finished and return List of StackModels
             mCallBack.onDataAvailable(stackList);
         }
-        Log.d(TAG, "onDownLoadComplete: ends");
+        return null;
     }
 }

@@ -1,7 +1,6 @@
 package com.eunan.tracey.com594cw2018;
 
 
-import android.media.Image;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,9 +9,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class WeatherModel {
 
     @Getter
